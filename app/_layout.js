@@ -1,29 +1,19 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import { tabOptions, styles, COLORS } from './Css/layoutCss';
 
 export default function Layout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#E83D84',
-
-        // HEADER GLOBAL
-        headerStyle: {
-          backgroundColor: '#fff',
-        },
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 20,
-        },
-        headerShadowVisible: false, // remove sombra feia padrão
-
-        // ÍCONE DIREITA (engrenagem)
+        ...tabOptions,
         headerRight: () => (
           <Ionicons
             name="settings-outline"
             size={24}
-            style={{ marginRight: 15 }}
-            color="#000"
+            style={styles.headerIcon}
+            color={COLORS.text}
           />
         ),
       }}
@@ -32,8 +22,14 @@ export default function Layout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="home" size={24} color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <View style={focused ? styles.tabIconFocused : null}>
+              <Ionicons
+                name={focused ? "home" : "home-outline"}
+                size={focused ? 28 : 24}
+                color={color}
+              />
+            </View>
           ),
         }}
       />
@@ -42,8 +38,14 @@ export default function Layout() {
         name="perfil"
         options={{
           title: 'Loja',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="person" size={24} color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <View style={focused ? styles.tabIconFocused : null}>
+              <Ionicons
+                name={focused ? "person" : "person-outline"}
+                size={focused ? 28 : 24}
+                color={color}
+              />
+            </View>
           ),
         }}
       />
