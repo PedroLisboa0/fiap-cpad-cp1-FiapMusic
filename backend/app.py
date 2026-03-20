@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 PLAYLIST_FILE = os.path.join(os.path.dirname(__file__), "playlist.json")
-EXPECTED_KEYS = {"music_name", "artist", "floor", "num_of_likes"}
+EXPECTED_KEYS = {"name", "artist", "floor", "likes"}
 
 
 def _load_playlist():
@@ -34,8 +34,6 @@ def add_song():
         return jsonify({"error": f"Required keys: {EXPECTED_KEYS}"}), 400
 
     playlist = _load_playlist()
-    if any(s["music_name"] == song["music_name"] for s in playlist):
-        return jsonify({"error": "music_name já existe"}), 409
 
     new_song = {k: str(song[k]).strip() for k in EXPECTED_KEYS}
     playlist.append(new_song)
@@ -43,8 +41,8 @@ def add_song():
     return jsonify(new_song), 201
 
 
-@app.route("/songs/<music_name>", methods=["PUT"])
-def update_song(music_name):
+@app.route("/songs/<name>", methods=["PUT"])
+def update_song(name):
     updates = request.json or {}
     if not updates:
         return jsonify({"error": "Nenhuma atualização fornecida"}), 400
@@ -54,7 +52,7 @@ def update_song(music_name):
 
     playlist = _load_playlist()
     for song in playlist:
-        if song.get("music_name") == music_name:
+        if song.get("name") == name:
             for k in EXPECTED_KEYS:
                 if k in updates:
                     song[k] = str(updates[k]).strip()

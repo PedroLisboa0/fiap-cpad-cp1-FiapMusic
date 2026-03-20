@@ -1,0 +1,34 @@
+{
+    "songs": [
+        {
+            "name": "Surfando Karmas e DNA",
+            "artist": "Engenheiros do Hawaii",
+            "floor": 1,
+            "likes": 8
+        },
+        {
+            "name": "Cotidiano",
+            "artist": "Chico Buarque",
+            "floor": 2,
+            "likes": 9
+        },
+        {
+            "name": "Carta ao Tom 74",
+            "artist": "Vinicius de Moraes, Toquinho",
+            "floor": 3,
+            "likes": 7
+        },
+        {
+            "name": "O Papa é Pop",
+            "artist": "Engenheiros do Hawaii",
+            "floor": 4,
+            "likes": 10
+        },
+        {
+            "name": "João e Maria",
+            "artist": "Chico Buarque",
+            "floor": 5,
+            "likes": 6
+        }
+    ]
+}
