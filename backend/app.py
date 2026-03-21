@@ -24,7 +24,13 @@ def _save_playlist(data):
 
 @app.route("/songs", methods=["GET"])
 def get_songs():
-    return jsonify(_load_playlist()), 200
+    floor = request.args.get("floor", "all") # 'Floor' vem com parametro do GET, caso não venha, a resposta vai ser a playlist com todos os andares.
+    playlist = _load_playlist()
+    if floor == "all":
+        return jsonify(playlist), 200
+    else:
+        response = [song for song in playlist if song.get("floor") == floor]
+        return jsonify(response), 200
 
 
 @app.route("/songs", methods=["POST"])

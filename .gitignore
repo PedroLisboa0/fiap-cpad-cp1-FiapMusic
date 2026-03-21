@@ -49,3 +49,6 @@ env/
 __pycache__/
 instance/
 *.sqlite3
+
+# vscode
+.vscode/*
